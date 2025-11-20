@@ -3335,11 +3335,12 @@
         "title": "Architekturdiagramm",
         "thumbnail": "./public/content/images/thumbnail.stride.jpg",
         "id": 10,
-        "diagramType": "STRIDE"
+        "diagramType": "STRIDE",
+        "description": "Bearbeitung"
       }
     ],
     "reviewer": "Georg Neugebauer",
-    "diagramTop": 11,
+    "diagramTop": 12,
     "threatTop": 102
   },
   "version": "2.5.0"
