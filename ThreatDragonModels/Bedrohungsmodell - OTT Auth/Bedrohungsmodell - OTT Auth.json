@@ -243,7 +243,7 @@
             "id": "a1d5bbe6-465f-43bb-bd96-7ce687db37aa",
             "data": {
               "name": "Login System -\nWebapp +\nMobile App",
-              "description": "Vergleicht eingegebenen OTT-Wert auf Telefon mit erwartetem OTT seitens 2-Faktor-Dienst. ",
+              "description": "Vergleicht eingegebenen OTT-Wert auf Telefon mit erwartetem OTT seitens 2-Faktor-Dienst. \nUses Standard Cryptography libraries",
               "type": "tm.Process",
               "isTrustBoundary": false,
               "outOfScope": false,
@@ -266,7 +266,7 @@
                   "id": "9a7c3c03-a142-4080-a5c1-aa510c6f24aa",
                   "title": "Brute-Force-Angriff auf Benutzerkonten",
                   "status": "Open",
-                  "severity": "High",
+                  "severity": "Medium",
                   "type": "Spoofing",
                   "description": "Ein Angreifer versucht durch automatisiertes Ausprobieren (Brute Force) von Passwörtern, die Identität eines legitimen Benutzers anzunehmen\n\nCAPEC-49: Password Brute Forcing An adversary tries every possible value for a password until they succeed. \n\nMitre ATT&CK: T1110.001 Brute Force: Password Guessing\nAdversaries with no prior knowledge of legitimate credentials within the system or environment may guess passwords to attempt access to accounts.\n\nD: 8 / R: 10 / E: 10 / A: 5 / DREA: 24",
                   "mitigation": "(2 Faktor Authentifizierung)\nCaptcha um Bots vorzubeugen\nDie Anwendung sperrt Benutzerkonten oder IP-Adressen nach zu vielen fehlgeschlagenen Versuchen temporär\nStrong Password Policy D3-SPP Modifying system configuration to increase password strength.\n\nOWASP ASVS V6.4.1 \nVerify that system generated initial passwords or activation codes are\nsecurely randomly generated, follow the existing password policy, and\nexpire after a short period of time or after they are initially used. These\ninitial secrets must not be permitted to become the long term password\n\nDamage: 8 (Schaden bleibt bei Erfolg hoch)\nReproducibility: 2 (Durch Sperre kaum wiederholbar)\nExploitability: 2 (Brute-Force wird ineffektiv)\nAffected Users: 5\nNeuer DREA: 17",
@@ -279,7 +279,7 @@
                   "id": "c9d9a3c1-9194-4b2b-94f7-897476e81f28",
                   "title": "User hat Adminrechte",
                   "status": "Open",
-                  "severity": "Critical",
+                  "severity": "Medium",
                   "type": "Elevation of privilege",
                   "description": "Ein authentifizierter Benutzer kann durch Manipulation von Parametern (z.B. Ändern der User-ID in der URL oder Setzen eines Cookies admin=true) Adminfunktions kriegen.\n\nCAPEC-122: Privilege Abuse An adversary is able to exploit features of the target that should be reserved for privileged users or administrators but are exposed to use by lower or non-privileged accounts.\n\nATTACK: T1068 Exploitation for Privilege Escalation \nAdversaries may exploit software vulnerabilities in an attempt to elevate privileges.\n\nD: 10 / R: 10 / E: 10 / A: 3 / DREA: 34",
                   "mitigation": "Admin check Serverseitig machen damit Cookie manipulation nicht funktioniert.\nNur Admin Accounts kriegen ein dediziertes admin um implizite rechte wie admin=true zu vermeiden\nServerseitige Session damit rollen nicht in den Cookies oder der URL sind\nLogging der Admin Zugriffe auf den Server zur überwachung\nWiederholte Authorization checks im Backend.\nOWASP ASVS V8.2.2General Authorization Design\nD: 10 / R: 3 / E: 1 / A: 3 / DREA: 17",
@@ -292,7 +292,7 @@
                   "id": "3a91beb8-75ff-420a-9bbe-a732bf68a269",
                   "title": "App Daten mitlesen",
                   "status": "Open",
-                  "severity": "Critical",
+                  "severity": "Medium",
                   "type": "Information disclosure",
                   "description": "Die App speichert alle Daten auf der SD-Karte (Public Storage). Angreifer können diese durch andere Apps (compromised Handys) auslesen\nMitre CAPEC-37: Retrieve Embedded Sensitive Data\nAn attacker examines a target system to find sensitive data that has been embedded within it.\n\nMitre ATT&CK: T1409 Stored Application Data\nAdversaries may try to access and collect application data resident on the device\n\nD: 10 / R: 10 / E: 10 / A: 4 / DREA: 34",
                   "mitigation": "Sensible Daten werden nur im isolierten internen Speicher der App abgelegt. \nDaten online auf Servern speichern um wichtige daten nicht auf dem Gerät zu lassen\nVerschlüsselung der gespeicherten Daten um das lesen zu erschweren\nGeräte mit positiver Root Detection oder Jailbreak Detection unterschiedlich behandeln.\nReferenz: OWASP MASVS-STORAGE-1\n\nD: 10 / R: 3 / E: 2 / A: 4 / DREA: 19",
@@ -305,12 +305,12 @@
               "hasOpenThreats": true,
               "isWebApplication": null,
               "threatFrequency": {
-                "spoofing": 5,
+                "spoofing": 6,
                 "tampering": 0,
                 "repudiation": 0,
-                "informationDisclosure": 5,
+                "informationDisclosure": 6,
                 "denialOfService": 0,
-                "elevationOfPrivilege": 8
+                "elevationOfPrivilege": 9
               },
               "handlesCardPayment": null,
               "handlesGoodsOrServices": null
@@ -433,7 +433,7 @@
                   "id": "2564ee64-d94f-4505-838c-d90d63c0211b",
                   "title": "DDoS",
                   "status": "Open",
-                  "severity": "Critical",
+                  "severity": "Medium",
                   "type": "Denial of service",
                   "description": "Ein DDoS Angriff kann den 2-FaktorAuthentifizierungs-Dienst überlasten und somit für Anwender unerreichbar machen. \n\nCAPEC-125: Flooding: An adversary consumes the resources of a target by rapidly engaging in a large number of interactions with the target.\n\nATT&CK: TA0038 - Network Effects: The adversary is trying to intercept or manipulate network traffic to or from a device.\n\nD: 8 / R: 10 / E: 5 / A: 10 / DREA: 33",
                   "mitigation": "Firewall, Load-Balancer oder CDN einsetzen, um direkten Datenverkehr auf 2-FaktorAuthentifizierungs-Server zu begrenzen.\n\nDEFEND: D3-ITF - Inbound Traffic Filtering\nASVS: CWE 770 (8.1.4): Verify the application can detect and alert on abnormal numbers of requests, such as by IP, user, total per hour or day, or whatever makes sense for the application.\n\nD: 4 / R: 6 / E: 2 / A: 10 / Neuer DREA: 22",
@@ -455,7 +455,7 @@
                 "tampering": 0,
                 "repudiation": 0,
                 "informationDisclosure": 0,
-                "denialOfService": 8,
+                "denialOfService": 9,
                 "elevationOfPrivilege": 0
               },
               "isWebApplication": null
@@ -940,7 +940,7 @@
             "id": "166a4763-016a-486b-92df-a86adc8bab82",
             "data": {
               "name": "Allsecure Mobile \nPhone OTT Service",
-              "description": "",
+              "description": "Uses Standard Cryptography libraries",
               "type": "tm.Process",
               "isTrustBoundary": false,
               "outOfScope": false,
@@ -952,7 +952,8 @@
               "isEncrypted": false,
               "isPublicNetwork": false,
               "handlesCardPayment": null,
-              "isWebApplication": null
+              "isWebApplication": null,
+              "handlesGoodsOrServices": null
             }
           },
           {
@@ -1936,7 +1937,7 @@
             },
             "vertices": [
               {
-                "x": 500,
+                "x": 470,
                 "y": 133
               }
             ]
@@ -2100,7 +2101,7 @@
             "data": {
               "type": "tm.Store",
               "name": "Log-DB",
-              "description": "",
+              "description": "Uses Standard Cryptography libraries",
               "outOfScope": false,
               "reasonOutOfScope": "",
               "isALog": true,
@@ -2113,7 +2114,7 @@
                   "id": "280077e6-4fac-43cb-94a3-a3d28e90034e",
                   "title": "Manipulation von Log-Dateien",
                   "status": "Open",
-                  "severity": "Critical",
+                  "severity": "Medium",
                   "type": "Tampering",
                   "description": "Ein Angreifer, der Zugriff auf das interne Netzwerk oder die Datenbank erlangt hat, verändert oder löscht Einträge in der Log-Datenbank, um Spuren seines Angriffs zu verwischen\n\nMitre CAPEC: CAPEC-268 (Audit Log Manipulation)\nThe attacker injects, manipulates, deletes, or forges malicious log entries into the log file, in an attempt to mislead an audit of the log file or cover tracks of an attack.\n\nMitre ATT&CK: T1070 (Indicator Removal)\nAdversaries may delete or modify artifacts generated within systems to remove evidence of their presence or hinder defenses.\n\nD: 8 / R: 10 / E: 6 / A: 10 / DREA: 34",
                   "mitigation": "Datenbank zugriffen Loggen um unbefugte Zugriffe zu überwachen.\nAn den SIEM-Server senden, um eine Kopie zu haben.\nAuf nicht editierbar einstellen um Änderungen an den logs zu verhindern.\n(Kryptographisch speichern, sodass die Angreifer mit den Daten nicht viel anfangen können)\nAlerts und Monitoring\nFile Integrity Monitoring D3-FIM Detecting any suspicious changes to files in a computer system.\nD: 2 / R: 4 / E: 3 / A: 10 / DREA:  19",
@@ -2124,7 +2125,7 @@
                 }
               ],
               "threatFrequency": {
-                "tampering": 8,
+                "tampering": 10,
                 "repudiation": 0,
                 "informationDisclosure": 0,
                 "denialOfService": 0
@@ -2486,7 +2487,7 @@
             "data": {
               "type": "tm.Process",
               "name": "SIEM",
-              "description": "",
+              "description": "Uses Standard Cryptography libraries",
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
@@ -2500,7 +2501,7 @@
                   "id": "5d7ef4ab-1a23-4c84-ad67-c5ebe572b473",
                   "title": "Löschen von Sicherheitsberichten ohne Nachweisbarkeit",
                   "status": "Open",
-                  "severity": "Medium",
+                  "severity": "Low",
                   "type": "Repudiation",
                   "description": "In einer Firma werden wichtige SIEM-Sicherheitsberichte von einem Admin oder Hacker gelöscht.\nWeil die Firma keine guten Kontrollen und Protokolle hat, kann sie nicht beweisen, wer es war\n\nMitre CAPEC: CAPEC-93 (Log Injection-Tampering-Forging)\nhe attacker injects, manipulates or forges malicious log entries in the log file, allowing them to mislead a log audit, cover traces of attack, or perform other malicious actions. The target host is not properly controlling log access.\n\nMitre ATT&CK: T1562 (Impair Defenses)\nAdversaries may maliciously modify components of a victim environment in order to hinder or disable defensive mechanisms.\n\nD: 6 / R: 10 / E: 5 / A: 3 / DREA: 24",
                   "mitigation": "Separation of Duties (RBAC) Implementierung von Rollen: Nur \"Auditoren\" dürfen lesen, niemand darf löschen\nBericht gegen andere Logs in der Firma gegenchecken.\nAuch auf externen Servern speichern und gegenchecken\nWrite Once only um das editieren und löschen zu erschweren.\nOWASP ASVS V8: Verify that the principle of least privilege is applied\nD: 3 / R: 6 / E: 2 / A: 3 / DREA: 14",
@@ -2513,7 +2514,7 @@
               "threatFrequency": {
                 "spoofing": 0,
                 "tampering": 0,
-                "repudiation": 6,
+                "repudiation": 7,
                 "informationDisclosure": 0,
                 "denialOfService": 0,
                 "elevationOfPrivilege": 0
